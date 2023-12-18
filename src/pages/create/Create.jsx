@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFetch } from "../../hook/useFetch";
+import { useNavigate } from "react-router-dom";
 import "./Create.css";
 
 export default function Create() {
@@ -9,6 +10,7 @@ export default function Create() {
   const [newIngredient, setNewIngredient] = useState(""); // for each element of the ingredient
   const [ingredients, setIngredients] = useState([]); //adding each ing. to an array
   const ingredientInput = useRef(null);
+  const history = useNavigate();
 
   const { postData, data, error } = useFetch(
     "http://localhost:3000/recipes",
@@ -37,6 +39,13 @@ export default function Create() {
     setNewIngredient("");
     ingredientInput.current.focus(); //focus on the input field so that the cursor automatic ally into the input feild.
   };
+
+  //Redirecting to the home page after submitting
+  useEffect(() => {
+    if (data) {
+      history("/");
+    }
+  }, [data]);
 
   return (
     <div className="create">

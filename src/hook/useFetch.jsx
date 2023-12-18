@@ -23,7 +23,10 @@ export const useFetch = (url, method = "GET") => {
       setIsPending(true);
 
       try {
-        const res = await fetch(url, { ...fetchOptions, signal: controller.signal });
+        const res = await fetch(url, {
+          ...fetchOptions,
+          signal: controller.signal,
+        });
         if (!res.ok) {
           throw new Error(res.statusText);
         }
@@ -44,16 +47,16 @@ export const useFetch = (url, method = "GET") => {
 
     // invoke the function
     if (method === "GET") {
-      fetchData()
+      fetchData();
     }
     if (method === "POST" && options) {
-      fetchData(options)
+      fetchData(options);
     }
 
     return () => {
       controller.abort();
     };
-  }, [url]);
+  }, [url, method, options]);
 
   return { data, isPending, error, postData };
 };
