@@ -16,6 +16,16 @@
   position: relative;
 }
 
+.recipe-list .card.dark {
+  background-color: #555;
+}
+
+.recipe-list .card.dark p,
+.recipe-list .card.dark h3,
+.recipe-list .card.dark div {
+  color: #e2e2e2;
+}
+
 .recipe-list .card:hover {
   transform: scale(1.1);
 }
